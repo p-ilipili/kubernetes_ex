@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-fapimysql-deployment
+  namespace: default
+labels:
+  app: fapi-mysql
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fapi-mysql
+  template:
+    metadata:
+      labels:
+        app: fapi-mysql
+    spec:
+      containers:
+        - name: mysql
+          image: datascientest/mysql-k8s:1.0.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql
+                  key: MYSQL_PASSWORD
+          ports:
+            - containerPort: 3306
+        - name: fastapi
+          image: ilipili/kubernetes-exam-pymysql:latest
+          env:
+            - name: MYSQL_URL
+              value: "localhost:3306"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql
+                  key: MYSQL_PASSWORD
+            - name: DATABASE_NAME
+              value: "Main"
+          ports:
+            - containerPort: 8000
