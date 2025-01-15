@@ -116,11 +116,11 @@ We will therefore need to complete the code provided for the API and rebuild the
 ## Renderings
 The expected output is a set of files, with a comment file if required:
 
-the reworked main.py file
-a my-deployment-eval.yml file containing the Deployment declaration
-a my-service-eval.yml file containing the Service declaration
-a my-ingress-eval.yml file containing the Ingress declaration
-a my-secret-eval.yml file containing the Secret declaration
+- the reworked main.py file
+- a my-deployment-eval.yml file containing the Deployment declaration
+- a my-service-eval.yml file containing the Service declaration
+- a my-ingress-eval.yml file containing the Ingress declaration
+- a my-secret-eval.yml file containing the Secret declaration
 
 ## Solution
 Several errors have been encountered forcing to modify the main.py a lot more than necessary.
