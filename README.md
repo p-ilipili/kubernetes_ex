@@ -12,7 +12,7 @@ the second contains a FastAPI API
 The FastAPI API container has not yet been built, but the various files have already been created:
 
 The Dockerfile:
-'''
+```
 FROM ubuntu:20.04
 
 ADD files/requirements.txt files/main.py ./
@@ -22,10 +22,10 @@ RUN apt update && apt install python3-pip libmysqlclient-dev -y && pip install -
 EXPOSE 8000
 
 CMD uvicorn main:server --host 0.0.0.0
-'''
+```
 
 The main.py file containing the API:
-'''
+```
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.engine import create_engine
@@ -98,15 +98,15 @@ async def get_user(user_id):
             detail='Unknown User ID')
     else:
         return results[0]
-'''
+```
 
 The requirements.txt file, which contains the Python libraries to be installed:
-'''
+```
 fastapi
 sqlalchemy
 mysqlclient==2.1.1
 uvicorn
-'''
+```
 
 ## Instructions
 The aim of this exercise is to create a Deployment with 3 Pods, each containing both a MySQL container and a FastAPI container. We'll then need to create a Service and an Ingress to enable access to the API.
@@ -125,7 +125,7 @@ a my-secret-eval.yml file containing the Secret declaration
 ## Solution
 Several errors have been encountered forcing to modify the main.py a lot more than necessary.
 The most annoying errors was this one :
-'sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)")'
+`sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)")`
 Hence, I modified the connection method to the database so SQLAlchemy uses the pymysql library to connect to MySQL.
 
 ** For the installation to work you have to use the code in main_sqlalchemy.py for your main.py file. The Kubernetes deployment file is modified already. It uses a different docker image. **
