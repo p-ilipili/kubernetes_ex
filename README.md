@@ -124,7 +124,7 @@ The expected output is a set of files, with a comment file if required:
 
 ## Solution
 Several errors have been encountered forcing to modify the main.py a lot more than necessary.
-The most annoying errors was this one :
+The most annoying error was this one, which in fact hid several issues. The most important one being an issue with the DBAPI :
 `sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)")`
 Hence, I modified the connection method to the database so SQLAlchemy uses the pymysql library to connect to MySQL.
 
