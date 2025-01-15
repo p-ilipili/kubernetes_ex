@@ -1,5 +1,5 @@
 # kubernetes exam
-Create a pod with replicas with a FastAPI server communicating with MySQL including secrets and ingress.
+Create a pod with replicas with a FastAPI server communicating with MySQL including secrets and ingress.<br><br>
 This environment can serve as a base for other projects requiring a pod with FastAPI and MySQL.
 DB data and FAPI endpoints will just need to be added (and previous ones deleted of course).
 
@@ -124,10 +124,12 @@ The expected output is a set of files, with a comment file if required:
 
 ## Solution
 Several errors have been encountered forcing to modify the main.py a lot more than necessary.
-The most annoying error was this one, which in fact hid several issues. The most important one being an issue with the DBAPI :
-`sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)")`
+The most annoying error was this one, which in fact hid several issues. The most important one being an issue with the DBAPI :<br>
+`sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2002, "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)")`<br>
 Hence, I modified the connection method to the database so SQLAlchemy uses the pymysql library to connect to MySQL.
 
-** For the installation to work you have to use the code in main_sqlalchemy.py for your main.py file. The Kubernetes deployment file is modified already. It uses a different docker image. **
+**For the installation to work you have to use the code in main_sqlalchemy.py for your main.py file. The Kubernetes deployment file is modified already. It uses a different docker image.**
 
-For the rest, it's all quite straightforward. System environment vars, secret for the root password, etc.
+For the rest, it's all quite straightforward. System environment vars, secret for the root password, etc.<br>
+Enjoy!
+
